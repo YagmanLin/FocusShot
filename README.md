@@ -1,141 +1,143 @@
 # FocusShot
 
-FocusShot 是一款面向 macOS 的截图工具，用来快速制作“画重点”式的矩形高亮动画。
+[English](./README.md) | [简体中文](./README.zh-CN.md)
 
-它的核心思路不是先截图、再进复杂时间轴，而是直接在截图选区里继续绘制一个或多个矩形，并按照绘制顺序自动生成从左到右的剪切动画，最后可以预览并导出为 MP4。
+FocusShot is a macOS screenshot tool designed for quickly creating highlight-style rectangle animations.
 
-## 功能简介
+Instead of forcing you into a separate editor or timeline after taking a screenshot, FocusShot lets you keep drawing one or more rectangles directly on the capture overlay, automatically turns them into left-to-right reveal animations, and exports the result as an MP4.
 
-- 截图后直接在同一界面继续绘制高亮矩形，不跳预览中转页
-- 支持连续绘制多个矩形，并按绘制顺序依次播放动画
-- 矩形动画为从左到右的剪切出现效果，不是淡入
-- 预览与导出共用同一套动画逻辑，避免“预览一套、导出一套”
-- 支持自定义总动画时长、透明度、描边粗细、描边颜色、填充颜色
-- 支持多种叠加模式
-- 支持独立动画模式与整体缓动模式
-- 支持速度曲线面板，可直接拖拽控制点调整缓入缓出节奏
-- 支持将矩形拖拽移动、缩放、双击删除、`Option + 拖拽` 复制
-- 支持 `Command + Z` 撤销
-- 支持双击预览重新进入矩形编辑
-- 支持拖拽图片到预览区继续标注，也支持从剪贴板粘贴图片
-- 支持导出 MP4，并自动生成带时间戳的默认文件名
-- 支持自定义截图快捷键，支持固定导出快捷键 `Command + E`
-- 支持菜单栏常驻、显示主界面、开机启动、语言切换
+## Features
 
-## 适合用来做什么
+- Draw highlight rectangles directly on the same overlay after taking a screenshot, without switching to an intermediate preview screen
+- Draw multiple rectangles and play them in the exact order they were created
+- Use a left-to-right clipping reveal animation instead of a simple fade-in
+- Keep preview and export perfectly aligned by using the same animation pipeline
+- Customize total duration, opacity, stroke width, stroke color, and fill color
+- Support multiple blend modes
+- Choose between per-rectangle easing and shared sequence easing
+- Adjust easing with a curve editor by dragging control points directly
+- Move, resize, double-click to delete, and `Option + Drag` to duplicate rectangles
+- Undo with `Command + Z`
+- Double-click the preview to jump back into rectangle editing
+- Drag images into the preview for annotation, or paste images from the clipboard
+- Export to MP4 with timestamp-based default filenames
+- Support custom screenshot shortcuts and a fixed export shortcut with `Command + E`
+- Support menu bar mode, showing the main window, launch at login, and language switching
 
-- 文章重点句高亮动画
-- 教程视频里的局部强调
-- 应用界面操作演示
-- 论文、网页、截图内容的重点标注
-- 社交媒体短视频中的“画重点”视觉效果
+## Use Cases
 
-## 使用流程
+- Highlight animations for key sentences in articles
+- Local emphasis in tutorial videos
+- App UI walkthroughs and demonstrations
+- Annotating important parts of papers, webpages, and screenshots
+- “Highlight this part” visual effects for short-form social media videos
 
-1. 打开 FocusShot，点击“开始截图”或使用截图快捷键进入截图模式。
-2. 拖拽选取截图区域。
-3. 在同一个截图层里继续绘制一个或多个矩形。
-4. 按 `Enter` 完成，主界面会更新动画预览。
-5. 按 `Command + E` 或点击导出按钮，输出 MP4 视频。
+## Workflow
 
-## 交互亮点
+1. Open FocusShot and click “Start Capture” or use the screenshot shortcut.
+2. Drag to select the capture area.
+3. Draw one or more rectangles on the same capture overlay.
+4. Press `Enter` to finish and update the preview.
+5. Press `Command + E` or click the export button to render an MP4.
 
-- 预览窗口支持双击回到编辑状态
-- 编辑状态下支持滚轮缩放图片
-- 已绘制矩形支持直接选中、拖动、缩放
-- `Option + 拖拽` 可快速复制矩形
-- 双击矩形可快速删除
-- 左下角提供快捷操作提示，并会在选区覆盖时自动隐藏
+## Interaction Highlights
 
-## 快捷键
+- Double-click the preview to return to editing
+- Zoom the image with the mouse wheel while editing
+- Select, move, and resize existing rectangles directly
+- Use `Option + Drag` to duplicate a rectangle
+- Double-click a rectangle to delete it quickly
+- A shortcut hint card appears in the lower-left corner and hides automatically when the selection overlaps it
 
-- 截图：默认 `Option + W`
-- 导出视频：`Command + E`
-- 完成当前截图/编辑：`Enter`
-- 取消截图：`Esc`
-- 撤销：`Command + Z`
+## Shortcuts
 
-截图快捷键支持在应用内自定义，导出快捷键固定为 `Command + E`。
+- Screenshot: default `Option + W`
+- Export video: `Command + E`
+- Finish current capture/edit: `Enter`
+- Cancel capture: `Esc`
+- Undo: `Command + Z`
 
-## 技术实现
+The screenshot shortcut can be customized in the app, while the export shortcut remains fixed as `Command + E`.
 
-- 平台：macOS
-- 语言：Swift
-- UI：SwiftUI + AppKit
-- 导出：AVFoundation
-- 热键：Carbon HotKey / AppKit 事件桥接
+## Tech Stack
 
-项目整体是一个“轻量工具软件”结构，主界面负责参数调整和预览，截图层负责区域选择、矩形编辑与交互，导出模块负责把静态截图和矩形动画渲染为视频。
+- Platform: macOS
+- Language: Swift
+- UI: SwiftUI + AppKit
+- Export: AVFoundation
+- Hotkeys: Carbon HotKey / AppKit event bridging
 
-## 开发运行
+The project follows a lightweight utility app structure: the main window handles controls and preview, the overlay handles region selection and rectangle editing, and the export module renders static captures plus highlight animations into video.
 
-### 环境要求
+## Development
+
+### Requirements
 
 - Xcode
 - macOS
 
-### 本地运行
+### Run Locally
 
 ```bash
 cd /Users/wxc/Coding/FocusShot
 xcodebuild -project /Users/wxc/Coding/FocusShot/FocusShot.xcodeproj -scheme FocusShot -configuration Debug build
 ```
 
-也可以直接用 Xcode 打开：
+You can also open the project directly in Xcode:
 
 - `/Users/wxc/Coding/FocusShot/FocusShot.xcodeproj`
 
-然后选择 `FocusShot` scheme 运行。
+Then select the `FocusShot` scheme and run it.
 
-## 权限说明
+## Permissions
 
-作为截图软件，首次运行时通常需要用户手动授予这些权限：
+As a screenshot tool, the app usually needs these permissions on first launch:
 
-- 屏幕录制
-- 部分场景下的辅助功能权限
+- Screen Recording
+- Accessibility permission in some cases
 
-如果没有授权，截图结果可能为空白，或者无法正常捕获屏幕内容。
+Without the required permissions, captures may come out blank or fail to record screen content correctly.
 
-## 打包与发布
+## Packaging & Release
 
-项目内已经包含打包脚本与发布说明：
+The repository already includes packaging scripts and release notes:
 
-- 发布说明：[RELEASE.md](./RELEASE.md)
-- 打包脚本：`Scripts/package_release.sh`
+- Release notes: [RELEASE.md](./RELEASE.md)
+- Packaging script: `Scripts/package_release.sh`
 
-如果你只是本机调试，使用 Xcode 的开发签名即可。  
-如果你希望分发给别人安装，建议进一步配置：
+If you only run it locally, normal Xcode development signing is enough.
 
-- Developer ID 签名
-- notarization 公证
-- DMG 分发
+If you want to distribute it to other users, it is recommended to add:
 
-## 项目结构
+- Developer ID signing
+- notarization
+- DMG distribution
+
+## Project Structure
 
 ```text
 FocusShot/
-├─ FocusShot/                # 应用源码
-├─ FocusShot.xcodeproj       # Xcode 工程
-├─ Scripts/                  # 打包与辅助脚本
-├─ logo/                     # 图标与视觉素材
-├─ dist/                     # 打包输出目录
-└─ RELEASE.md                # 发布说明
+├─ FocusShot/                # App source code
+├─ FocusShot.xcodeproj       # Xcode project
+├─ Scripts/                  # Packaging and utility scripts
+├─ logo/                     # Icons and visual assets
+├─ dist/                     # Build and release output
+└─ RELEASE.md                # Release notes
 ```
 
-## 当前状态
+## Current Status
 
-FocusShot 已经具备完整的可用闭环：
+FocusShot already has a full usable workflow:
 
-- 截图
-- 绘制多个矩形
-- 调整动画节奏与样式
-- 实时预览
-- 重新编辑
-- 导出 MP4
+- Capture
+- Draw multiple rectangles
+- Tune timing and styling
+- Live preview
+- Re-edit
+- Export MP4
 
-它更像一款围绕“截图重点动画”这个单一需求不断打磨出来的工具，而不是通用截图软件。
+It is more of a focused utility built around one very specific need, highlight animation for screenshots, rather than a generic screenshot app.
 
 ## License
 
-如果你准备公开仓库，建议补充你自己的许可证，例如 MIT License。
-
+If you plan to publish the repository, consider adding a proper license such as the MIT License.
